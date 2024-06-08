@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
+                        <label class="col-sm-2 col-md-2 col-lg-1 col-form-label">Filter:</label>
+                        <div class="col-sm-10 col-md-4 col-lg-3">
                             <select class="form-control" id="id_bantuan" name="id_bantuan" required>
                                 <option value="">- Semua -</option>
                                 @foreach ($bantuan as $item)
@@ -31,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos">
                 <thead>
                     <tr>
@@ -46,6 +47,7 @@
                     </tr>
                 </thead>
             </table>
+        </div>
         </div>
     </div>
 @endsection

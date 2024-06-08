@@ -9,6 +9,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Font Bootstrap -->
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light static-top">
+    <nav class="navbar navbar-light bg-secondary bg-opacity-10 static-top">
         <div class="container">
             <a class="navbar-brand">
                 SIBANSOS
@@ -50,94 +51,56 @@
             </div>
         </div>
     </header>
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                        <h3>Fully Responsive</h3>
-                        <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                        <h3>Bootstrap 5 Ready</h3>
-                        <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                        <h3>Easy to Use</h3>
-                        <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="testimonials text-center bg-light">
         <div class="container">
             <h2 class="mb-5">Tentang SIBANSOS</h2>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima adipisci autem voluptatum impedit libero delectus reprehenderit voluptates ut aliquam omnis aut, eius veritatis numquam ex temporibus, quod alias ipsa! Inventore quasi nostrum, illum dolorem neque reprehenderit qui, beatae possimus molestias, labore expedita! Vel quisquam, quaerat fugiat nam quidem cum unde repellat tempore minima tenetur debitis deserunt ab maxime enim dolorem a recusandae nulla ipsam mollitia. Id debitis alias asperiores excepturi quasi adipisci assumenda ea, quae aperiam tempore natus quod eligendi, facilis animi, expedita nemo? Saepe minus eius assumenda rerum! Ab, itaque adipisci? Neque fugit vitae quos ex soluta assumenda atque.
+                Selamat datang di SIBANSOS, platform inovatif yang dirancang khusus untuk memfasilitasi sistem administrasi RT dan RW. 
+                Kami memahami betapa pentingnya efisiensi dan transparansi dalam pengelolaan administrasi dan bantuan sosial di tingkat komunitas, 
+                dan itulah mengapa SIBANSOS hadir sebagai solusi terbaik untuk kebutuhan ini. 
             </p>
-            {{-- <div class="row">
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="..." />
-                        <h5>Margaret E.</h5>
-                        <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="..." />
-                        <h5>Fred S.</h5>
-                        <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="..." />
-                        <h5>Sarah W.</h5>
-                        <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </section>
-    <section>
-
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{ asset('adminlte/dist/img/showcase-1.jpg') }}')"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>Apa itu SIBANSOS?</h2>
+                    <p class="lead mb-0">
+                        SIBANSOS adalah sistem yang memungkinkan warga untuk dengan mudah mengajukan permohonan bantuan sosial. 
+                        Platform ini juga memudahkan pengurus RT dan RW dalam mengelola dan meninjau setiap permintaan yang masuk, 
+                        memastikan bahwa bantuan sosial tepat sasaran dan diberikan kepada mereka yang benar-benar membutuhkan.
+                    </p>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('{{ asset('adminlte/dist/img/showcase-2.jpg') }}')"></div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>Mengapa memilih SIBANSOS</h2>
+                    <p class="lead mb-0">
+                        SIBANSOS hadir untuk menjawab tantangan dalam pengelolaan bantuan sosial di tingkat komunitas. 
+                        Kami berkomitmen untuk meningkatkan kesejahteraan warga dengan menyediakan alat yang memudahkan proses administrasi dan distribusi bantuan.
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
-    <footer class="footer bg-light">
+    <footer class="footer bg-secondary bg-opacity-10">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item"><a href="#!">About</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">Contact</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                    <ul class="mb-2" style="list-style-type: none;">
+                        <li class="text-black mb-1 opacity-75">Contact</li>
+                        <li class="text-black opacity-50">Email: example@gmail.com</li>    
+                        <li class="text-black opacity-50">Phone: (000) 0000-0000</li>  
+                        <li class="text-black opacity-50">Mobile: 0000-0000-0000</li>
                     </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
                 </div>
-                <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item me-4">
-                            <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                        </li>
-                        <li class="list-inline-item me-4">
-                            <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                        </li>
-                    </ul>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="h-100 text-center text-lg-start my-auto">
+                    <p class="text-muted small mt-3 mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

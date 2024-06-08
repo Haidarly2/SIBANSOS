@@ -22,6 +22,7 @@ class PenerimaSeeder extends Seeder
                 'pln' => 4, 
                 'pdam' => 5, 
                 'status_kesehatan' => 4,
+                'status' => 'Diterima',
             ],
             [
                 'id_bansos' => 2,
@@ -31,6 +32,7 @@ class PenerimaSeeder extends Seeder
                 'pln' => 3, 
                 'pdam' => 3, 
                 'status_kesehatan' => 2, 
+                'status' => 'Diterima', 
             ],
             [
                 'id_bansos' => 2,
@@ -40,6 +42,7 @@ class PenerimaSeeder extends Seeder
                 'pln' => 2, 
                 'pdam' => 1, 
                 'status_kesehatan' => 4, 
+                'status' => 'Diterima',
             ],
         ];
     

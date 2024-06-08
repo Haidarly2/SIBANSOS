@@ -78,6 +78,13 @@
                     <th>Status Pernikahan</th>
                     <td>{{ $warga->status_pernikahan }}</td>
                 </tr>
+                <tr>
+                    <th>RT</th>
+                    <td>{{ $warga->rt }}</td>
+                </tr>
+                <tr>
+                    <th>RW</th>
+                    <td>{{ $warga->rw }}</td>
             </table>
         @endempty
         <a href="{{ url('warga') }}" class="btn btn-sm btn-default mt-2">

@@ -67,6 +67,6 @@
                     <input type="text" name="notelp" class="form-control" id="notelp" value="{{ old('notelp') }}" required>
                     @error('notelp')
                         <small class="form-text text-danger">
-                            {{ $
+                            {{ $message }}
 </div>
 @endsection

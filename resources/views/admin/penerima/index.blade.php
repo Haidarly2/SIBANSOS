@@ -4,9 +4,6 @@
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
-            <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('penerima/create') }}">Tambah</a>
-            </div>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -23,7 +20,7 @@
                             <select class="form-control" id="id_bansos" name="id_bansos" required>
                                 <option value="">- Semua -</option>
                                 @foreach ($bansos as $item)
-                                    <option value="{{ $item->bansos }}">{{ $item->nama_program}}</option>
+                                    <option value="{{ $item->bansos }}">{{ $item->nama_program }}</option>
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Nama Program</small>
@@ -35,8 +32,11 @@
                 <thead>
                     <tr>
                         <th>Nomor</th>
-                        <th>Nama Penerima</th>
-                        <th>No Telp</th>
+                        <th>Nama Program</th>
+                        <th>No KK</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>RT/RW</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -61,36 +61,28 @@
             var dataPenerima = $('#table_penerima').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('penerima/list') }}",
+                    "url": "{{ url('penerima/showup') }}",
                     "type": 'POST',
                     "data": function(d) {
                         d.id_bansos = $('#id_bansos').val();
                     }
                 },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
+                columns: [
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    { data: 'bansos.nama_program', name: 'bansos.nama_program', orderable: true, searchable: true },
+                    { data: 'user.nokk', name: 'user.nokk', orderable: false, searchable: true },
+                    { data: 'user.nama', name: 'user.nama', orderable: false, searchable: true },
+                    { data: 'user.alamat', name: 'user.alamat', orderable: false, searchable: true },
                     {
-                        data: 'nama',
-                        name: 'nama',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'notelp',
-                        name: 'notelp',
+                        data: null,
+                        name: 'user.rt_rw',
                         orderable: false,
-                        searchable: true
+                        searchable: true,
+                        render: function(data, type, row) {
+                            return row.user.rt + '/' + row.user.rw;
+                        }
                     },
-                    {
-                        data: 'aksi',
-                        name: 'aksi',
-                        orderable: false,
-                        searchable: false
-                    }
+                    { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
                 ]
             });
 

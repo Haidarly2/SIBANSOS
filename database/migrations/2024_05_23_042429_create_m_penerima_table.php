@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('pdam');
             $table->integer('status_kesehatan');
             $table->integer('status_rumah');
+            $table->string('status');
+            $table->double('skoredas');
+            $table->double('skoresaw');
             $table->timestamps();
 
             $table->foreign('id_bansos')->references('id_bansos')->on('m_bansos');

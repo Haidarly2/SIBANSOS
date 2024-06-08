@@ -1,7 +1,6 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="container">
         <div class="card card-outline card-primary">
             <div class="card-header">
                 <h3 class="card-title">{{ $page->title }}</h3>
@@ -47,7 +46,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @push('css')

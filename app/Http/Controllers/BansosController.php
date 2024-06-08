@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BansosModel;
 use App\Models\BantuanModel;
+use App\Models\PenerimaModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -11,63 +12,64 @@ class BansosController extends Controller
 {
     public function index()
     {
+        $breadcrumb = (object) [
+            'title' => 'Daftar Bansos',
+            'list'  => ['Home', 'Bansos']
+        ];
+
+        $page = (object) [
+            'title' => 'Daftar bansos yang terdaftar dalam sistem'
+        ];
         $user = Auth::user();
-        if ($user->id_level == '1') {
-            $breadcrumb = (object) [
-                'title' => 'Daftar Bansos',
-                'list'  => ['Home', 'Bansos']
-            ];
-    
-            $page = (object) [
-                'title' => 'Daftar bansos yang terdaftar dalam sistem'
-            ];
-    
-            $activeMenu = 'bansos';
-    
-            $bantuan = BantuanModel::all();
-    
+        $id_level = $user->id_level;
+        $activeMenu = 'bansos';
+
+        $bantuan = BantuanModel::all();
+        if ($id_level == 1) {
             return view('admin.bansos.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bantuan' => $bantuan, 'activeMenu' => $activeMenu]);
-        } 
-        
-        elseif ($user->id_level == '2') {
-            $breadcrumb = (object) [
-                'title' => 'Daftar Data Bansos ',
-                'list'  => ['Home', 'Bansos']
-            ];
-    
-            $page = (object) [
-                'title' => 'Daftar bansos yang terdaftar dalam sistem'
-            ];
-    
-            $activeMenu = 'bansos';
-    
-            $bantuan = BantuanModel::all();
-    
+        }
+        elseif($id_level == 2){
             return view('rt.bansos.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bantuan' => $bantuan, 'activeMenu' => $activeMenu]);
         }
+        
     }
 
     public function list(Request $request) 
     {
         $bansos = BansosModel::with('bantuan');
-        
+        $user = Auth::user();
+        $level = $user->id_level;
+    
         if ($request->id_bantuan) {
             $bansos->where('id_bantuan', $request->id_bantuan);
         }
-
-        return DataTables::of($bansos)
-            ->addIndexColumn()
-            ->addColumn('aksi', function ($bansoss) {
-                $btn = '<a href="'.url('/bansos/' . $bansoss->id_bansos).'" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<a href="'.url('/bansos/' . $bansoss->id_bansos . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
-                $btn .= '<form class="d-inline-block" method="POST" action="'. url('/bansos/'.$bansoss->id_bansos).'">'. csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
-                return $btn;
-            })
-            ->rawColumns(['aksi'])
-            ->make(true);
+    
+        if ($level == '1') {
+            return DataTables::of($bansos)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($bansoss) {
+                    $btn = '<a href="'.url('/bansos/' . $bansoss->id_bansos).'" class="btn btn-info btn-sm">Detail</a> ';
+                    $btn .= '<a href="'.url('/bansos/' . $bansoss->id_bansos . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
+                    $btn .= '<form class="d-inline-block" method="POST" action="'. url('/bansos/'.$bansoss->id_bansos).'">'. csrf_field() . method_field('DELETE') .
+                        '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        } elseif ($level == '2') {
+            return DataTables::of($bansos)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($bansossi) {
+                    $btn = '<a href="'.url('/bansos/' . $bansossi->id_bansos).'" class="btn btn-info btn-sm">Detail</a> ';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        } else {
+            return DataTables::of($bansos)->make(true);
+        }
     }
-
+    
     public function create()
     {
         $breadcrumb = (object) [
@@ -117,7 +119,17 @@ class BansosController extends Controller
     }
 
     public function show(String $id_bansos){
+        $user = Auth::user();
+        $userRt = $user->rt; 
+        
         $bansos = BansosModel::with('bantuan')->where('id_bansos', $id_bansos)->first();
+    
+        $penerima = PenerimaModel::with(['user', 'bansos'])
+            ->where('id_bansos', $id_bansos)
+            ->whereHas('user', function ($query) use ($userRt) {
+                $query->where('rt', $userRt);
+            })
+            ->get();
     
         $breadcrumb = (object) [
             'title' => 'Detail Bansos',
@@ -133,14 +145,27 @@ class BansosController extends Controller
         ];
     
         $activeMenu = 'bansos';
-    
-        return view('admin.bansos.detail', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'bansos' => $bansos,
-            'activeMenu' => $activeMenu
-        ]);
+        
+        $id_level = $user->id_level;
+        if($id_level == 1){
+            return view('admin.bansos.detail', [
+                'breadcrumb' => $breadcrumb,
+                'page' => $page,
+                'bansos' => $bansos,
+                'activeMenu' => $activeMenu
+            ]);
+        }
+        else{
+            return view('rt.bansos.detail', [
+                'breadcrumb' => $breadcrumb,
+                'page' => $page,
+                'bansos' => $bansos,
+                'penerima' => $penerima,
+                'activeMenu' => $activeMenu
+            ]);
+        }
     }
+    
 
     public function edit($id_bansos)
     {
@@ -171,7 +196,6 @@ class BansosController extends Controller
         ]);
     }
 
-
     public function update(Request $request, String $id_bansos)
     {
         $request->validate([
@@ -199,5 +223,13 @@ class BansosController extends Controller
         }
 
         return redirect('/bansos')->with('success', 'Data berhasil diubah');
+    }
+
+    public function destroy($id)
+    {
+        $bansos = BansosModel::find($id);
+        $bansos->delete();
+
+        return redirect('bansos');
     }
 }

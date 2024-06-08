@@ -191,11 +191,41 @@
             </div>
             <div class="form-group row">
                 <label class="col-1 col-form-label control-label">
-                Status Pernikah
+                Status Pernikahan
                 </label>
                 <div class="col-11">
                     <input type="text" name="status_pernikahan" class="form-control" id="status_pernikahan" value="{{ old('status_pernikahan') }}" required>
                     @error('status_pernikahan')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-1 col-form-label control-label">
+                    RT
+                </label>
+                <div class="col-11">
+                    @if($rt)
+                        <input type="text" name="rt" class="form-control" id="rt" value="{{ $rt }}" readonly required>
+                    @else
+                        <input type="text" name="rt" class="form-control" id="rt" value="{{ old('rt') }}" required>
+                    @endif
+                    @error('rt')
+                        <small class="form-text text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-1 col-form-label control-label">
+                RW
+                </label>
+                <div class="col-11">
+                    <input type="text" name="rw" class="form-control" id="rw" value="{{ old('rw', '6') }}" readonly required>
+                    @error('rw')
                         <small class="form-text text-danger">
                             {{ $message }}
                         </small>

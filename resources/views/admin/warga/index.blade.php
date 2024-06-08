@@ -4,6 +4,7 @@
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
+            {{-- Button Tambah --}}
             <div class="card-tools">
                 <a class="btn btn-sm btn-primary mt-1" href="{{ url('warga/create') }}">Tambah</a>
             </div>
@@ -15,22 +16,26 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select class="form-control" id="id_level" name="id_level" required>
-                                <option value="">- Semua -</option>
-                                @foreach ($warga as $item)
-                                    <option value="{{ $item->warga }}">{{ $item->nama_level }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">nik</small>
+            {{-- Filter RT --}}
+            @if ($userLevel != 2)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-1 control-label col-form-label">Filter RT:</label>
+                            <div class="col-3">
+                                <select class="form-control" id="rt" name="rt" required>
+                                    <option value="">- Semua -</option>
+                                    @foreach ($rts as $rt)
+                                        <option value="{{ $rt->rt }}">{{ $rt->rt }}</option>
+                                    @endforeach
+                                </select>
+                                <small class="form-text text-muted">RT</small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
+            {{-- Tabel Warga --}}
             <table class="table table-bordered table-striped table-hover table-sm" id="table_warga">
                 <thead>
                     <tr>
@@ -38,10 +43,10 @@
                         <th>NIK</th>
                         <th>Nama</th>
                         <th>Alamat</th>
-                        {{-- <th>RT</th>
-                        <th>RW</th> --}}
+                        <th>RT</th>
+                        <th>RW</th>
                         <th>Level</th>
-                        <th>Agama</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -69,7 +74,7 @@
                     "url": "{{ url('warga/list') }}",
                     "type": 'POST',
                     "data": function(d) {
-                        d.id_level = $('#id_level').val();
+                        d.rt = $('#rt').val();
                     }
                 },
                 columns: [{
@@ -96,18 +101,18 @@
                         orderable: false,
                         searchable: false
                     },
-                    // {
-                    //     data: 'rt',
-                    //     name: 'rt',
-                    //     orderable: true,
-                    //     searchable: true
-                    // },
-                    // {
-                    //     data: 'rw',
-                    //     name: 'rw',
-                    //     orderable: true,
-                    //     searchable: true
-                    // },
+                    {
+                        data: 'rt',
+                        name: 'rt',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'rw',
+                        name: 'rw',
+                        orderable: true,
+                        searchable: true
+                    },
                     {
                         data: 'level.nama_level',
                         name: 'level.nama_level',
@@ -115,8 +120,8 @@
                         searchable: true
                     },
                     {
-                        data: 'agama',
-                        name: 'agama',
+                        data: 'status',
+                        name: 'status',
                         orderable: false,
                         searchable: true
                     },
@@ -129,7 +134,7 @@
                 ]
             });
 
-            $('#id_level').on('change', function() {
+            $('#rt').on('change', function() {
                 dataWarga.ajax.reload();
             });
         });

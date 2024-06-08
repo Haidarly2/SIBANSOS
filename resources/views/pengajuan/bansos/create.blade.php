@@ -120,6 +120,7 @@
                 </div>
             </div>
             <input type="hidden" name="id_bansos" value="{{ $id_bansos }}">
+            <input type="hidden" name="status" value="Pending">
             <div class="form-group row">
                 <div class="col-md-10 offset-md-2">
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
